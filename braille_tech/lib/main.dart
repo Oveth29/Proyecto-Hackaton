@@ -3,18 +3,21 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'profile_screen.dart'; // Importa la pantalla de Perfil
 import 'language_screen.dart'; // Importa la pantalla de Idiomas
 
-
-
 void main() {
   runApp(BrailleTechApp());
 }
 
+/**Clase Principal
+ * Le da estructura visual base al codigo
+ */
 class BrailleTechApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      //Estandar Visual Google
       title: 'BRAILLE TECH',
       theme: ThemeData(
+        //Define el color primario de la App
         primarySwatch: Colors.blue,
       ),
       home: HomeScreen(),
@@ -22,35 +25,72 @@ class BrailleTechApp extends StatelessWidget {
   }
 }
 
+/**Cuerpo de la Aplicación
+ * Se encarga de crear el Appbar y body principales, juntando el resto de witget, sirve como
+ * interfaz inicial
+ */
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
+      appBar: PreferredSize(
+      //preferredSize: Size.fromHeight(120),
+      preferredSize: Size.fromRadius(50),
+      child:  AppBar(
+        //Parte Visual Superior de la Aplicación
         backgroundColor: Colors.black,
-        title: Text('BRAILLE TECH'),
+        title: Row(
+          children: [
+            //Logo en la parte superior
+            Padding( //Agrega espacio alrededor de una imagen
+              padding: const EdgeInsets.all(2.7), //Espacio de 8
+              child: Center(
+                child: Image.asset(
+                  'assets/LogoApp.png', //LogoBarilleTech
+                  height: 60,
+                ),
+              ),
+            ),
+            Text(
+              'BRAILLE TECH',
+              style: TextStyle(
+                //Añade stilos al texto
+                color: Colors.white,
+                fontSize: 25,
+              ),
+            ),
+          ],
+        ),
+        leading: IconButton(
+          //Crea un boton a la izquierda
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded, //Le da una forma de triangulo
+            size: 50,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            //Aquí va la funcionalidad del boton                            <---AgregarFuncionalidad(SalirDelApp)
+          },
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.more_vert),
+            //Crea un botton en la derecha
+            icon: Icon(
+              Icons.more_vert, //Le da un icono al boton en forma de 3 puntos
+              size: 50,
+              color: Colors.white,
+            ),
             onPressed: () {
-              // Acción al presionar los tres puntitos
+              // Acción al presionar los tres puntitos                      <----AgregarFuncionalidad
             },
           ),
         ],
       ),
-      body: Column(
+      ),
+      body: SafeArea(//Establece una area segura para evitar chocar con el appbar
+      child: Column(
         children: [
-          // Logo en la parte superior
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Image.asset(
-                'assets/logo.png', // Aquí debes poner el logo de la app
-                height: 100,
-              ),
-            ),
-          ),
           // Botones horizontales
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -89,9 +129,21 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20), // Espacio en la parte inferior
+          
+          SizedBox(height: 5,), // Espacio en la parte inferior
+          Padding(//Agrega espacio o margenes para su widget hijo
+            padding: const EdgeInsets.symmetric(//Aplica lo mismo a ambos lados
+              horizontal: 10 //Longitud de la linea horizontal 
+            ),
+            child: Container(
+              height: 0.5,//Grosor linea blanca debajo de botones
+              color: Colors.white,
+            ),
+          )
+          
         ],
       ),
+    ),
     );
   }
 }
@@ -124,9 +176,10 @@ class _MenuScreenState extends State<MenuScreen> {
       );
       if (available) {
         setState(() => _isListening = true);
-        _speech.listen(onResult: (val) => setState(() {
-              _text = val.recognizedWords;
-            }));
+        _speech.listen(
+            onResult: (val) => setState(() {
+                  _text = val.recognizedWords;
+                }));
       }
     } else {
       setState(() => _isListening = false);
@@ -152,7 +205,8 @@ class _MenuScreenState extends State<MenuScreen> {
               height: 150,
               decoration: BoxDecoration(
                 color: Colors.white, // Fondo blanco
-                borderRadius: BorderRadius.only(//@Winter: Modificadores de cuadrado de ubicación
+                borderRadius: BorderRadius.only(
+                  //@Winter: Modificadores de cuadrado de ubicación
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
                   bottomLeft: Radius.circular(20),
@@ -170,7 +224,9 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 80), // Espacio estético entre el semicuadrado y el botón
+            SizedBox(
+                height:
+                    80), // Espacio estético entre el semicuadrado y el botón
             // Botón redondo con el ícono de micrófono
             ElevatedButton(
               onPressed: _listen,
@@ -207,7 +263,6 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 }
 
-
 /**========BOTON AJUSTES==========
  * La siguiente clase muestra el lienzo con el que se estará trabajando dentro del boton del
  * appbar principal "Ajustes".
@@ -237,7 +292,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfileScreen(), // Pantalla de edición de perfil
+                    builder: (context) =>
+                        ProfileScreen(), // Pantalla de edición de perfil
                   ),
                 );
               },
@@ -276,13 +332,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AssistantsScreen(), // Navega a la pantalla de Asistentes
+                          builder: (context) =>
+                              AssistantsScreen(), // Navega a la pantalla de Asistentes
                         ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       //primary: Colors.blue,
-                      minimumSize: Size(double.infinity, 50), // Botón ancho y bajo
+                      minimumSize:
+                          Size(double.infinity, 50), // Botón ancho y bajo
                     ),
                     child: Text('Asistentes', style: TextStyle(fontSize: 18)),
                   ),
@@ -321,7 +379,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LanguageScreen(), // Pantalla de idiomas
+                          builder: (context) =>
+                              LanguageScreen(), // Pantalla de idiomas
                         ),
                       );
                     },
@@ -353,4 +412,3 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 }
-
