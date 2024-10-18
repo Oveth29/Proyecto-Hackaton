@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sqflite: ^2.3.0
+  path: any
   #collection: any #^1.18.0
   #material_color_utilities: any #^0.11.1
   #meta: any #^1.15.0
@@ -39,6 +41,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   speech_to_text: ^7.0.0
+
 
 dev_dependencies:
   flutter_test:
