@@ -29,7 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
-    sdk: flutter
+      sdk: flutter
   #collection: any #^1.18.0
   #material_color_utilities: any #^0.11.1
   #meta: any #^1.15.0
