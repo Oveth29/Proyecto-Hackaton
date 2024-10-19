@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'profile_screen.dart'; // Importa la pantalla de Perfil
-import 'language_screen.dart'; // Importa la pantalla de Idiomas
-import 'asignaturas_screen.dart'; // Importa la pantalla de Asignaturas
-import 'calificaciones_screen.dart'; // Importa la pantalla de Calificaciones
-import 'mensajes_screen.dart'; // Importa la pantalla de Mensajes
+import 'profile_screen.dart';
+import 'language_screen.dart';
+import 'asignaturas_screen.dart';
+import 'calificaciones_screen.dart';
+import 'mensajes_screen.dart';
 
 void main() {
   runApp(BrailleTechApp());
@@ -29,7 +29,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0; // Índice para gestionar el contenido
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
               IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  // Acción al presionar el botón de regresar
                   if (_currentIndex != 0) {
                     setState(() {
-                      _currentIndex = 0; // Regresar al Home
+                      _currentIndex = 0;
                     });
                   }
                 },
@@ -177,9 +176,17 @@ class _HomeScreenState extends State<HomeScreen> {
               child: IndexedStack(
                 index: _currentIndex,
                 children: [
-                  Center(
-                      child: Text('Contenido del Mapa',
-                          style: TextStyle(color: Colors.white))),
+                  Column(
+                    children: [
+                      Center(
+                          child: Text('Contenido del Mapa',
+                              style: TextStyle(color: Colors.white))),
+                      // Imagen que se muestra al seleccionar "Mapa"
+                      if (_currentIndex == 0)
+                        Image.asset(
+                            "assets/MAPAMENU.png"), // Asegúrate de que el nombre sea correcto
+                    ],
+                  ),
                   MenuScreen(),
                   SettingsScreen(),
                 ],
@@ -238,15 +245,14 @@ class _MenuScreenState extends State<MenuScreen> {
             width: 250,
             height: 150,
             decoration: BoxDecoration(
-              color: Colors.white, // Fondo blanco
+              color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
               border: Border.all(color: Colors.black, width: 2),
             ),
             child: Center(
               child: Text(
                 'Ubicación precisa',
-                style:
-                    TextStyle(fontSize: 20, color: Colors.black), // Texto negro
+                style: TextStyle(fontSize: 20, color: Colors.black),
               ),
             ),
           ),
@@ -294,13 +300,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _talbackEnabled = false; // Estado del Talback (Activado/Desactivado)
-  bool _showAssistants = false; // Estado para mostrar/ocultar asistentes
+  bool _talbackEnabled = false;
+  bool _showAssistants = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Fondo negro
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),
@@ -336,7 +342,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             SizedBox(height: 40),
             if (_showAssistants) ...[
-              SizedBox(height: 20), // Espacio antes de los asistentes
+              SizedBox(height: 20),
               _buildAssistantButton('Camila'),
               SizedBox(height: 10),
               _buildAssistantButton('Eduardo'),
@@ -346,7 +352,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    _showAssistants = false; // Volver a ocultar asistentes
+                    _showAssistants = false;
                   });
                 },
                 style: ElevatedButton.styleFrom(
@@ -363,7 +369,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _showAssistants = true; // Mostrar asistentes
+                          _showAssistants = true;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -393,7 +399,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           value: _talbackEnabled,
                           onChanged: (value) {
                             setState(() {
-                              _talbackEnabled = value; // Cambiar estado
+                              _talbackEnabled = value;
                             });
                           },
                         ),
@@ -452,3 +458,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 }
+
+
+                    //Image.asset("assets/ImagenarribaMapa"),
+                    //Image.asset("assets/imagenbajomapa"),

@@ -12,7 +12,6 @@ class _AsignaturasScreenState extends State<AsignaturasScreen> {
     {'nombre': 'Ciencias', 'completada': false},
     {'nombre': 'Inglés', 'completada': true},
   ];
-
   void _toggleCompletion(int index) {
     setState(() {
       asignaturas[index]['completada'] = !asignaturas[index]['completada'];
