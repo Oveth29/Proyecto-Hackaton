@@ -1,3 +1,4 @@
+import 'package:braille_tech/BaseDatosSQL/SQLiteConnetion.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'profile_screen.dart'; // Importa la pantalla de Perfil
@@ -5,6 +6,7 @@ import 'language_screen.dart'; // Importa la pantalla de Idiomas
 
 void main() {
   runApp(BrailleTechApp());
+  checkTables();
 }
 
 /**Clase Principal
