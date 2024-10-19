@@ -177,14 +177,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 index: _currentIndex,
                 children: [
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                          child: Text('Contenido del Mapa',
-                              style: TextStyle(color: Colors.white))),
-                      // Imagen que se muestra al seleccionar "Mapa"
+                      //Center(
+                          //child: Text('Contenido del Mapa',
+                             // style: TextStyle(color: Colors.white))),
+                      // Mostrar ambas imágenes al seleccionar "Mapa"
                       if (_currentIndex == 0)
-                        Image.asset(
-                            "assets/MAPAMENU.png"), // Asegúrate de que el nombre sea correcto
+                        Column(
+                         children: [
+                         Image.asset("assets/MAPAMENU.png"),
+                        SizedBox(height: 10), 
+                        Image.asset("assets/ABAJOMAPA.png"), 
+    ],
+  )
                     ],
                   ),
                   MenuScreen(),
