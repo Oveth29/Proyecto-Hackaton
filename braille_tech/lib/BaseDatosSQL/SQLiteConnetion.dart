@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -64,6 +66,141 @@ class LocalDB {
       },
     );
   }
+
+  Future<void> addUsuario(
+      String nombre, String fotoPerfil, int idIdioma, int idUniversidad) async {
+    final db = await database;
+
+    // Usamos rawInsert en lugar de rawQuery
+    await db.rawInsert('''
+    INSERT INTO Usuarios (Nombre, FotoPerfil, Id_Universidad, Id_Idioma)
+    VALUES (?, ?, ?, ?);
+  ''', [
+      nombre,
+      fotoPerfil,
+      idIdioma,
+      idUniversidad
+    ]); // Pasamos los valores con placeholders
+    print("Nuevo USUARIO agregado====================");
+  }
+
+  Future<void> addNumeroEmergencia(int Id_Usuarios, String Numero) async {
+    final db = await database;
+
+    // Usamos rawInsert en lugar de rawQuery
+    await db.rawInsert('''
+    INSERT INTO NumerosEmergencia (Id_Usuarios, Numero)
+    VALUES (?, ?);
+  ''', [
+      Id_Usuarios,
+      Numero,
+    ]); // Pasamos los valores con placeholders
+    print("Nuevo Numero agregado====================");
+  }
+
+  Future<void> updateNumEmergencia(int userid_2, String newNum) async {
+    final db = await database;
+    await db.rawUpdate('''
+    UPDATE NumerosEmergencia
+    SET Numero = '${newNum}'
+    WHERE IdNumEmergencia = ${userid_2};
+''');
+  print('Actualización de Num exitosa');
+  }
+
+
+  Future<void> updateUsuario(int userid, String newName) async {
+    final db = await database;
+    await db.rawUpdate('''
+    UPDATE Usuarios
+    SET Nombre = '${newName}'
+    WHERE IdUsuarios = ${userid};
+''');
+  print('Actualización exitosa');
+  }
+
+/*
+  Future<void> addUsuario(String nombre, String fotoPerfil, int idIdioma, int idUniversidad) async {
+    final db = await database;
+    await db.rawQuery('''
+    INSERT INTO Usuarios(Nombre, FotoPerfil , Id_Universidad, Id_Idioma)
+    VALUES(${nombre},${fotoPerfil},${idIdioma}, ${idUniversidad});
+    ''');
+    print("NuevoUSUARIO====================");
+  }*/
+/*
+  Future<void> addUsuario(String nombre, String fotoPerfil, int idIdioma, int idUniversidad) async {
+    final db = await database;
+    await db.insert(
+      'Usuarios',
+      {
+        'Nombre': nombre,
+        'FotoPerfil': fotoPerfil,
+        'Id_Idioma': idIdioma,
+        'Id_Universidad': idUniversidad,
+      },
+    );
+  }*/
+
+  /*Future<void> updateUsuario(int userId, String newName) async {
+    final db = await database;
+    await db.update(
+      'Usuarios',
+      {'Nombre': newName},
+      where: 'IdUsuarios = ?',
+      whereArgs: [userId],
+    );
+  }*/
+
+/*
+  Future<String?> getUsuarioNombre(int userId) async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'Usuarios',
+      columns: ['Nombre'],
+      where: 'IdUsuarios = ?',
+      whereArgs: [userId],
+    );
+    print(result);
+
+    if (result.isNotEmpty) {
+      return result.first['Nombre'] as String?;
+    } else {
+      return null; // Devuelve null si no se encuentra el usuario
+    }
+  }*/
+
+  Future<String?> getUsuarioNombre(dynamic IdUser) async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> res = await db.rawQuery('''
+  SELECT u.Nombre
+  FROM Usuarios u
+  WHERE IdUsuarios = ${IdUser};
+''');
+    // Comprobar si hay resultados
+    if (res.isNotEmpty) {
+      return res.first['Nombre']
+          as String?; // Retorna el primer nombre encontrado
+    } else {
+      return null; // Si no se encuentra, retorna null
+    }
+  }
+
+  Future<String?> getNumeroEmergencia(int userId) async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'NumerosEmergencia',
+      columns: ['Numero'],
+      where: 'Id_Usuarios = ?',
+      whereArgs: [userId],
+    );
+
+    if (result.isNotEmpty) {
+      return result.first['Numero'] as String?;
+    } else {
+      return null; // Devuelve null si no se encuentra el número
+    }
+  }
 }
 
 Future<void> checkTables() async {
@@ -71,4 +208,11 @@ Future<void> checkTables() async {
   final result =
       await db.rawQuery("SELECT name FROM sqlite_master WHERE type='table';");
   print(result); // Imprime las tablas existentes
+}
+
+Future<void> checkUsuarios() async {
+  final Database db = await LocalDB().database;
+  final List<Map<String, dynamic>> res =
+      await db.rawQuery('SELECT * FROM Usuarios');
+  print(res); // Imprime todos los usuarios para verificar si existen registros
 }

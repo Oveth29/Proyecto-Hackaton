@@ -7,6 +7,7 @@ import 'language_screen.dart'; // Importa la pantalla de Idiomas
 void main() {
   runApp(BrailleTechApp());
   checkTables();
+  checkUsuarios();
 }
 
 /**Clase Principal
