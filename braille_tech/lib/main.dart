@@ -1,157 +1,285 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'profile_screen.dart'; // Importa la pantalla de Perfil
-import 'language_screen.dart'; // Importa la pantalla de Idiomas
+import 'profile_screen.dart';
+import 'language_screen.dart';
+import 'asignaturas_screen.dart';
+import 'calificaciones_screen.dart';
+import 'mensajes_screen.dart';
 
 void main() {
   runApp(BrailleTechApp());
 }
 
-/**Clase Principal
- * Le da estructura visual base al codigo
- */
 class BrailleTechApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //Estandar Visual Google
       title: 'BRAILLE TECH',
+<<<<<<< HEAD
+      theme: ThemeData(primarySwatch: Colors.blue),
+=======
       theme: ThemeData(
-        //Define el color primario de la App
         primarySwatch: Colors.blue,
       ),
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
       home: HomeScreen(),
     );
   }
 }
 
-/**Cuerpo de la Aplicación
- * Se encarga de crear el Appbar y body principales, juntando el resto de witget, sirve como
- * interfaz inicial
- */
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: PreferredSize(
-      //preferredSize: Size.fromHeight(120),
-      preferredSize: Size.fromRadius(50),
-      child:  AppBar(
-        //Parte Visual Superior de la Aplicación
-        backgroundColor: Colors.black,
-        title: Row(
-          children: [
-            //Logo en la parte superior
-            Padding( //Agrega espacio alrededor de una imagen
-              padding: const EdgeInsets.all(2.7), //Espacio de 8
-              child: Center(
-                child: Image.asset(
-                  'assets/LogoApp.png', //LogoBarilleTech
-                  height: 60,
+        preferredSize: Size.fromRadius(50),
+        child: AppBar(
+          backgroundColor: Colors.black,
+          title: Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () {
+                  if (_currentIndex != 0) {
+                    setState(() {
+                      _currentIndex = 0;
+                    });
+                  }
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2.7),
+                child: Center(
+                  child: Image.asset(
+                    'assets/LogoApp.png',
+                    height: 60,
+                  ),
                 ),
               ),
-            ),
-            Text(
-              'BRAILLE TECH',
-              style: TextStyle(
-                //Añade stilos al texto
+              Text(
+                'BRAILLE TECH',
+<<<<<<< HEAD
+<<<<<<< HEAD
+                style: TextStyle(color: Colors.white, fontSize: 25),
+=======
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
+<<<<<<< HEAD
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+              ),
+            ],
+          ),
+          actions: [
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                switch (value) {
+                  case 'Asignaturas':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AsignaturasScreen()),
+                    );
+                    break;
+                  case 'Calificaciones':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CalificacionesScreen()),
+                    );
+                    break;
+                  case 'Mensajes':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MensajesWhatsAppStyle()),
+                    );
+                    break;
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return {'Asignaturas', 'Calificaciones', 'Mensajes'}
+                    .map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice, style: TextStyle(color: Colors.black)),
+                  );
+                }).toList();
+              },
+              icon: Icon(
+                Icons.more_vert,
+                size: 50,
                 color: Colors.white,
-                fontSize: 25,
               ),
             ),
           ],
         ),
-        leading: IconButton(
-          //Crea un boton a la izquierda
-          icon: Icon(
-            Icons.arrow_back_ios_new_rounded, //Le da una forma de triangulo
-            size: 50,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            //Aquí va la funcionalidad del boton                            <---AgregarFuncionalidad(SalirDelApp)
-          },
+      ),
+      body: SafeArea(
+<<<<<<< HEAD
+<<<<<<< HEAD
+        child: ListView(
+=======
+        child: Column(
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+=======
+        child: Column(
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+<<<<<<< HEAD
+<<<<<<< HEAD
+                _buildNavButton('Mapa', 0),
+                _buildNavButton('Menú', 1),
+                _buildNavButton('Ajustes', 2),
+              ],
+            ),
+            Divider(color: Colors.white),
+            IndexedStack(
+              index: _currentIndex,
+              children: [
+                Column(
+                  children: [
+                    if (_currentIndex == 0) ...[
+                      Image.asset("assets/MAPAMENU.png"),
+                      SizedBox(height: 10),
+                      Image.asset("assets/ABAJOMAPA.png"),
+                    ],
+                  ],
+                ),
+                MenuScreen(),
+                SettingsScreen(),
+              ],
+=======
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.black,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _currentIndex = 0; // Mapa
+                      });
+                    },
+                    child: Text('Mapa'),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.black,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _currentIndex = 1; // Menú
+                      });
+                    },
+                    child: Text('Menú'),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.black,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _currentIndex = 2; // Ajustes
+                      });
+                    },
+                    child: Text('Ajustes'),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Container(
+                height: 0.5,
+                color: Colors.white,
+              ),
+            ),
+            Expanded(
+              child: IndexedStack(
+                index: _currentIndex,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //Center(
+                          //child: Text('Contenido del Mapa',
+                             // style: TextStyle(color: Colors.white))),
+                      // Mostrar ambas imágenes al seleccionar "Mapa"
+                      if (_currentIndex == 0)
+                        Column(
+                         children: [
+                         Image.asset("assets/MAPAMENU.png"),
+                        SizedBox(height: 10), 
+                        Image.asset("assets/ABAJOMAPA.png"), 
+    ],
+  )
+                    ],
+                  ),
+                  MenuScreen(),
+                  SettingsScreen(),
+                ],
+              ),
+<<<<<<< HEAD
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+            ),
+          ],
         ),
-        actions: [
-          IconButton(
-            //Crea un botton en la derecha
-            icon: Icon(
-              Icons.more_vert, //Le da un icono al boton en forma de 3 puntos
-              size: 50,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // Acción al presionar los tres puntitos                      <----AgregarFuncionalidad
-            },
-          ),
-        ],
       ),
+<<<<<<< HEAD
+<<<<<<< HEAD
+    );
+  }
+
+  Widget _buildNavButton(String label, int index) {
+    return Expanded(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.black,
+        ),
+        onPressed: () {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        child: Text(label),
       ),
-      body: SafeArea(//Establece una area segura para evitar chocar con el appbar
-      child: Column(
-        children: [
-          // Botones horizontales
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Navegación al mapa
-                  },
-                  child: Text('Mapa'),
-                ),
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Navegación al menú
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MenuScreen()),
-                    );
-                  },
-                  child: Text('Menú'),
-                ),
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Navegación a ajustes
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SettingsScreen()),
-                    );
-                  },
-                  child: Text('Ajustes'),
-                ),
-              ),
-            ],
-          ),
-          
-          SizedBox(height: 5,), // Espacio en la parte inferior
-          Padding(//Agrega espacio o margenes para su widget hijo
-            padding: const EdgeInsets.symmetric(//Aplica lo mismo a ambos lados
-              horizontal: 10 //Longitud de la linea horizontal 
-            ),
-            child: Container(
-              height: 0.5,//Grosor linea blanca debajo de botones
-              color: Colors.white,
-            ),
-          )
-          
-        ],
-      ),
-    ),
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
     );
   }
 }
 
-/**============BOTON MENU=============.
- * La siguiente clase muestra el lienzo con el que se estará trabajando dentro del boton del
- * appbar principal "Menu".
-*/
 class MenuScreen extends StatefulWidget {
   @override
   _MenuScreenState createState() => _MenuScreenState();
@@ -160,7 +288,7 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   late stt.SpeechToText _speech;
   bool _isListening = false;
-  String _text = 'Presiona para hablar';
+  String _text = ''; // Texto reconocido
 
   @override
   void initState() {
@@ -177,9 +305,15 @@ class _MenuScreenState extends State<MenuScreen> {
       if (available) {
         setState(() => _isListening = true);
         _speech.listen(
-            onResult: (val) => setState(() {
-                  _text = val.recognizedWords;
-                }));
+          onResult: (val) {
+            setState(() {
+              _text = val.recognizedWords;
+            });
+            // Respuesta de la app
+            String response = "Usted está en $val.recognizedWords";
+            _showResponse(response);
+          },
+        );
       }
     } else {
       setState(() => _isListening = false);
@@ -187,228 +321,349 @@ class _MenuScreenState extends State<MenuScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 46, 46, 46),
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text('Menú'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Semicuadrado que representa la ubicación
-            Container(
-              width: 250,
-              height: 150,
-              decoration: BoxDecoration(
-                color: Colors.white, // Fondo blanco
-                borderRadius: BorderRadius.only(
-                  //@Winter: Modificadores de cuadrado de ubicación
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 2,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  'Ubicación precisa',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
+<<<<<<< HEAD
+<<<<<<< HEAD
+  void _showResponse(String response) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.black,
+          content: Container(
+            width: double.maxFinite,
+            child: Text(
+              response,
+              style: TextStyle(color: Colors.white),
             ),
-            SizedBox(
-                height:
-                    80), // Espacio estético entre el semicuadrado y el botón
-            // Botón redondo con el ícono de micrófono
-            ElevatedButton(
-              onPressed: _listen,
-              style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(40),
-                side: BorderSide(color: Colors.black, width: 2),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    _isListening ? Icons.mic : Icons.mic_none,
-                    size: 60,
-                    color: Colors.black,
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    _isListening ? 'Escuchando...' : 'Pulse para hablar',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              _text,
-              style: TextStyle(fontSize: 18),
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cerrar', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
           ],
-        ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 250,
+            height: 150,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              border: Border.all(color: Colors.black, width: 2),
+            ),
+            child: Center(
+              child: Text(
+                'Ubicación precisa',
+                style: TextStyle(fontSize: 20, color: Colors.black),
+              ),
+            ),
+          ),
+          SizedBox(height: 80),
+          ElevatedButton(
+            onPressed: _listen,
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              shape: CircleBorder(),
+              padding: EdgeInsets.all(40),
+              side: BorderSide(color: Colors.black, width: 2),
+            ),
+            child: Icon(
+              _isListening ? Icons.mic : Icons.mic_none,
+              size: 60,
+              color: Colors.black,
+            ),
+          ),
+=======
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Cuadro de ubicación
+          Container(
+            width: 250,
+            height: 150,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              border: Border.all(color: Colors.black, width: 2),
+            ),
+            child: Center(
+              child: Text(
+                'Ubicación precisa',
+                style: TextStyle(fontSize: 20, color: Colors.black),
+              ),
+            ),
+          ),
+          SizedBox(height: 80),
+          // Botón redondo con el ícono de micrófono
+          ElevatedButton(
+            onPressed: _listen,
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              shape: CircleBorder(),
+              padding: EdgeInsets.all(40),
+              side: BorderSide(color: Colors.black, width: 2),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  _isListening ? Icons.mic : Icons.mic_none,
+                  size: 60,
+                  color: Colors.black,
+                ),
+                SizedBox(height: 8),
+                Text(
+                  _isListening ? 'Escuchando...' : 'Pulse para hablar',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+=======
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Cuadro de ubicación
+          Container(
+            width: 250,
+            height: 150,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              border: Border.all(color: Colors.black, width: 2),
+            ),
+            child: Center(
+              child: Text(
+                'Ubicación precisa',
+                style: TextStyle(fontSize: 20, color: Colors.black),
+              ),
+            ),
+          ),
+          SizedBox(height: 80),
+          // Botón redondo con el ícono de micrófono
+          ElevatedButton(
+            onPressed: _listen,
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              shape: CircleBorder(),
+              padding: EdgeInsets.all(40),
+              side: BorderSide(color: Colors.black, width: 2),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  _isListening ? Icons.mic : Icons.mic_none,
+                  size: 60,
+                  color: Colors.black,
+                ),
+                SizedBox(height: 8),
+                Text(
+                  _isListening ? 'Escuchando...' : 'Pulse para hablar',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+          SizedBox(height: 20),
+          Text(
+            _text,
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
+        ],
       ),
     );
   }
 }
 
-/**========BOTON AJUSTES==========
- * La siguiente clase muestra el lienzo con el que se estará trabajando dentro del boton del
- * appbar principal "Ajustes".
-*/
 class SettingsScreen extends StatefulWidget {
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _talbackEnabled = false; // Estado del Talback (Activado/Desactivado)
+  bool _talbackEnabled = false;
+  bool _showAssistants = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Ajustes'),
+        backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Círculo de perfil en la parte superior
             GestureDetector(
               onTap: () {
-                // Navega a la pantalla de edición de perfil al tocar el círculo
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ProfileScreen(), // Pantalla de edición de perfil
-                  ),
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
                 );
               },
               child: Column(
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundColor: Colors.grey[300], // Color del círculo
+                    backgroundColor: Colors.grey[300],
                     child: Icon(
                       Icons.person,
                       size: 50,
-                      color: Colors.black, // Ícono del perfil
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(height: 10),
                   Text(
                     'Perfil',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white, // Texto en letras blancas
-                    ),
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 40), // Espacio estético entre perfil y botones
-
-            // Botones semirectangulares verticales
-            Expanded(
-              child: Column(
-                children: [
-                  // Botón 1: Asistentes
-                  ElevatedButton(
-                    onPressed: () {
-                      // Acción al presionar el botón Asistentes
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              AssistantsScreen(), // Navega a la pantalla de Asistentes
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      //primary: Colors.blue,
-                      minimumSize:
-                          Size(double.infinity, 50), // Botón ancho y bajo
-                    ),
-                    child: Text('Asistentes', style: TextStyle(fontSize: 18)),
-                  ),
-                  SizedBox(height: 20),
-
-                  // Botón 2: Talback (con interruptor de activado/desactivado)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          // Acción al presionar el botón Talback
-                        },
-                        style: ElevatedButton.styleFrom(
-                          //primary: Colors.blue,
-                          minimumSize: Size(240, 50),
-                        ),
-                        child: Text('Talback', style: TextStyle(fontSize: 18)),
-                      ),
-                      Switch(
-                        value: _talbackEnabled,
-                        onChanged: (value) {
-                          setState(() {
-                            _talbackEnabled = value; // Cambiar estado
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-
-                  // Botón 3: Idioma
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navega a la pantalla de selección de idioma
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              LanguageScreen(), // Pantalla de idiomas
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      //primary: Colors.blue,
-                      minimumSize: Size(double.infinity, 50),
-                    ),
-                    child: Text('Idioma', style: TextStyle(fontSize: 18)),
-                  ),
-                  SizedBox(height: 20),
-
-                  // Botón 4: Navegador
-                  ElevatedButton(
-                    onPressed: () {
-                      // Acción para el botón Navegador (por ahora sin funcionalidad)
-                    },
-                    style: ElevatedButton.styleFrom(
-                      //primary: Colors.blue,
-                      minimumSize: Size(double.infinity, 50),
-                    ),
-                    child: Text('Navegador', style: TextStyle(fontSize: 18)),
-                  ),
-                ],
+            SizedBox(height: 40),
+            if (_showAssistants) ...[
+              SizedBox(height: 20),
+              _buildAssistantButton('Camila'),
+              SizedBox(height: 10),
+              _buildAssistantButton('Eduardo'),
+              SizedBox(height: 10),
+              _buildAssistantButton('Christhian'),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _showAssistants = false;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.black,
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                child: Text('Regresar', style: TextStyle(fontSize: 18)),
               ),
-            ),
+            ] else ...[
+              Expanded(
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _showAssistants = true;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
+                        minimumSize: Size(double.infinity, 50),
+                      ),
+                      child: Text('Asistentes', style: TextStyle(fontSize: 18)),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Acción al presionar el botón Talback
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.black,
+                            minimumSize: Size(240, 50),
+                          ),
+                          child:
+                              Text('Talback', style: TextStyle(fontSize: 18)),
+                        ),
+                        Switch(
+                          value: _talbackEnabled,
+                          onChanged: (value) {
+                            setState(() {
+                              _talbackEnabled = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LanguageScreen()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
+                        minimumSize: Size(double.infinity, 50),
+                      ),
+                      child: Text('Idioma', style: TextStyle(fontSize: 18)),
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Acción para el botón Navegador
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
+                        minimumSize: Size(double.infinity, 50),
+                      ),
+                      child: Text('Navegador', style: TextStyle(fontSize: 18)),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ],
         ),
       ),
     );
   }
+
+  Widget _buildAssistantButton(String name) {
+    return ElevatedButton(
+      onPressed: () {
+        // Acción al presionar el botón del asistente
+        print('Seleccionaste a $name');
+      },
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.black,
+        minimumSize: Size(double.infinity, 50),
+      ),
+      child: Text(name, style: TextStyle(fontSize: 18)),
+    );
+  }
 }
+
+
+                    //Image.asset("assets/ImagenarribaMapa"),
+                    //Image.asset("assets/imagenbajomapa"),

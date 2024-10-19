@@ -1,80 +1,180 @@
 import 'package:flutter/material.dart';
 
-/**======BOTON ASISTENTE=========
- * La clase "AssistantsScreen" será la encargada de mostrar y ejecutar las funciones dentro del boton
- * Asistente que opera en el menu de "Ajustes". 
+<<<<<<< HEAD
+<<<<<<< HEAD
+/**Observacion
+ * El codigo de abajo es una version de prueba, no esta refinado ni terminado, pero su objetivo es
+ * poder traducir el contenido a 4 idiomas distintos: Español, Ingles, Portugués y Frances
  */
+
+class LanguageScreen extends StatelessWidget {
+=======
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+/**======BOTON ASISTENTE========= */
 class AssistantsScreen extends StatelessWidget {
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Asistentes'),
+        title: Text(
+<<<<<<< HEAD
+<<<<<<< HEAD
+          'Seleccionar Idioma',
+          style: TextStyle(color: Colors.white), // Texto en blanco
+=======
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+          'Asistentes',
+          style: TextStyle(color: Colors.white), // Texto en blanco
+        ),
+        backgroundColor: Colors.black, // Fondo negro
       ),
       body: Center(
         child: Text(
           'Pantalla de Asistentes',
-          style: TextStyle(fontSize: 24),
+          style:
+              TextStyle(fontSize: 24, color: Colors.white), // Texto en blanco
+<<<<<<< HEAD
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
         ),
+        backgroundColor: Colors.black, // Fondo negro
       ),
+<<<<<<< HEAD
+=======
     );
   }
 }
 
-/**========Circulo De Perfil========
- * Esta clase entrará en acción cuando el usuario toque la burbuja de su perfil
- * mostrando datos que pueden ser rellenados por él, esta función aún no esta terminada
- * ni mucho menos refinada.
- */
-/*Ingresar numero de emergencia, y su Usuario*/
+/**========Circulo De Perfil======== */
 class ProfileScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emergencyNumberController = TextEditingController();
+  final TextEditingController _emergencyNumberController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Editar Perfil'),
+        title: Text(
+          'Editar Perfil',
+          style: TextStyle(color: Colors.white), // Texto en blanco
+        ),
+        backgroundColor: Colors.black, // Fondo negro
       ),
-      body: Padding(
+<<<<<<< HEAD
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+      body: Container(
+        color: Color.fromRGBO(63, 68, 67, 1), // Fondo gris
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+<<<<<<< HEAD
+            // Botón para Español
+=======
             // Semirectángulo para el Nombre de usuario
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(
                 labelText: 'Nombre de usuario',
+                labelStyle: TextStyle(color: Colors.white), // Etiqueta blanca
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: Colors.white), // Borde blanco
                 ),
+                filled: true,
+                fillColor: Colors.black, // Fondo negro
               ),
+              style: TextStyle(color: Colors.white), // Texto en blanco
             ),
             SizedBox(height: 20),
-            
+
             // Semirectángulo para el Número de emergencia
             TextField(
               controller: _emergencyNumberController,
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 labelText: 'Número de emergencia',
+                labelStyle: TextStyle(color: Colors.white), // Etiqueta blanca
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: Colors.white), // Borde blanco
                 ),
+                filled: true,
+                fillColor: Colors.black, // Fondo negro
               ),
+              style: TextStyle(color: Colors.white), // Texto en blanco
             ),
             SizedBox(height: 40),
-            
+
             // Botón para guardar los cambios
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
             ElevatedButton(
               onPressed: () {
-                // Acciones al guardar la información del perfil
-                String username = _usernameController.text;
-                String emergencyNumber = _emergencyNumberController.text;
-                // Implementar lógica de guardar
+                // Acción para cambiar el idioma a Español
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Fondo negro
+                foregroundColor: Colors.white, // Texto blanco
+<<<<<<< HEAD
+<<<<<<< HEAD
+                minimumSize: Size(double.infinity, 50),
+              ),
+              child: Text('Español', style: TextStyle(fontSize: 18)),
+            ),
+            SizedBox(height: 20),
+
+            // Botón para Inglés
+            ElevatedButton(
+              onPressed: () {
+                // Acción para cambiar el idioma a Inglés
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Fondo negro
+                foregroundColor: Colors.white, // Texto blanco
+                minimumSize: Size(double.infinity, 50),
+              ),
+              child: Text('Inglés', style: TextStyle(fontSize: 18)),
+            ),
+            SizedBox(height: 20),
+
+            // Botón para Portugués
+            ElevatedButton(
+              onPressed: () {
+                // Acción para cambiar el idioma a Portugués
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Fondo negro
+                foregroundColor: Colors.white, // Texto blanco
+                minimumSize: Size(double.infinity, 50),
+              ),
+              child: Text('Portugués', style: TextStyle(fontSize: 18)),
+            ),
+            SizedBox(height: 20),
+
+            // Botón para Francés
+            ElevatedButton(
+              onPressed: () {
+                // Acción para cambiar el idioma a Francés
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Fondo negro
+                foregroundColor: Colors.white, // Texto blanco
+                minimumSize: Size(double.infinity, 50),
+              ),
+              child: Text('Francés', style: TextStyle(fontSize: 18)),
+=======
+=======
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
+                minimumSize: Size(double.infinity, 50), // Tamaño mínimo
+              ),
               child: Text('Guardar'),
+>>>>>>> 8fac25e5be667864ab2481e8c0da682678c5ff08
             ),
           ],
         ),
@@ -82,5 +182,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-
